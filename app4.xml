@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ <bean id="qu" class="helloworld.Question">
+<property name="qid" value="1"></property>
+<property name="qname" value="What is HTML?"></property>
+<property name="answers">
+	<list>
+		<value>It's a hyper text markup language</value>
+		<value>It's a Scripting language</value>
+		<value>It is a programming language</value>
+	</list>
+</property>
+</bean>
+<bean id="add" class="helloworld.Address">
+<property name="street" value="bhavani">
+</property>
+<property name="city" value="vij">
+</property>
+<property name="state" value="ap">
+</property>
+<property name="country" value="kolkata">
+</property>
+</bean>    
+<bean id="obj3" class="helloworld.Emp1" autowire="byType">
+ 
+<property name="id">
+<value>16</value>
+</property>
+<property name="name">
+<value>Pavankalyan</value>
+</property>
+<property name="city">
+<value>vijayawada</value>
+</property>
+
+
+</bean>
+</beans>
