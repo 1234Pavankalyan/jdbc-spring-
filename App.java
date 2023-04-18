@@ -1,9 +1,7 @@
-package project;
-
-import java.util.List;
+package springbook;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * Hello world!
@@ -11,50 +9,25 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class App 
 {
-    public static void main( String[] args )
+   ;
+
+	public static void main( String[] args )
     {
-ApplicationContext context=new ClassPathXmlApplicationContext("ApplicationContext.xml");
-StudentJDBCTemplate student=(StudentJDBCTemplate)context.getBean("StudentJDBCTemplate");
-student.create("aryan", 23);
-student.create("vinay", 23);
-student.create("babu", 22);
-System.out.println(".....listing multiple Recorgs.......");
-List<Student>students=student.listStudents();
-for(Student record:students) {
-	System.out.print("ID => " +record.getId());
-	System.out.print(",name => " +record.getName());
-	System.out.println(",Age => " +record.getAge());
-	
-}
-System.out.println("---------Searching record by ID--------");
-Student student2 = student.getStudentByID(1);
-System.out.println("ID:" + student2.getId());
-System.out.println("Name:" + student2.getName());
-System.out.println("Age:" + student2.getAge());
+ ApplicationContext  context=new AnnotationConfigApplicationContext(AppConfig.class);
+ BookDao bookDao=context.getBean(BookDao.class);
+ Book book =new Book();
+ book.setTitle("the great history");
+ book.setAuthor("aryanshetty");
+ book.setGenre("libro");
+ book.setBorrowed(false);
+bookDao.create(book);
+ Book retriveBook =bookDao.findById(1L); 
+ System.out.println("retrived book " +retriveBook);
+ retriveBook.setBorrowed(true);
+ bookDao.delete(retriveBook);
+ Book deletedBook =bookDao.findById(1L); 
+ System.out.println("deleted book " +deletedBook);
 
 
-System.out.println("---------Updating record--------");
-student.setName("Rajesh");
-student.setAge(26);
-student.updateStudent(student);
-System.out.println("Record updated successfully!");
-System.out.println("Updated details:");
-System.out.println("ID:" + student.getId());
-System.out.println("Name:" + student.getName());
-System.out.println("Age:" + student.getAge());
-
-
-System.out.println("---------Deleting record--------");
-int deletedRecords = students.deleteStudentByID(3);
-if(deletedRecords > 0) {
-    System.out.println("Record with ID 3 deleted successfully!");
-}
-else {
-    System.out.println("Record with ID 3 not found or could not be deleted.");
     }
 }
-    }
-
-
-
-
